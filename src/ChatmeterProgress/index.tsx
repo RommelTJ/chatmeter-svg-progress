@@ -5,8 +5,8 @@ import {
   validateDuration,
   validateThreshold,
 } from '../utils';
-import ChatmeterSVGDefs from '@/ChatmeterProgress/components/ChatmeterSVGDefs';
-import ChatmeterSVGBars from '@/ChatmeterProgress/components/ChatmeterSVGBars';
+import ChatmeterSVGDefs from './components/ChatmeterSVGDefs';
+import ChatmeterSVGBars from './components/ChatmeterSVGBars';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
   const { mode, revAnimationThreshold, duration } = props;

@@ -4,6 +4,7 @@ import {
   validateProgress,
   validateDuration,
   validateThreshold,
+  validateFireThreshold,
 } from '../src/utils';
 import { shallow } from 'enzyme';
 import { describe, it } from '@jest/globals';
@@ -17,7 +18,7 @@ describe('ChatmeterProgress', () => {
 
   it('should be titled chatmeter progress', () => {
     const wrapper = shallow(<ChatmeterProgress />);
-    expect(wrapper.text()).toBe('Chatmeter Progress');
+    expect(wrapper.text()).toContain('Chatmeter Progress');
   });
 
   it('should support progress mode', () => {
@@ -95,5 +96,23 @@ describe('Utils', () => {
     const threshold = -10;
     const validatedThreshold = validateThreshold(duration, threshold);
     expect(validatedThreshold).toBe(DEFAULT_DURATION);
+  });
+
+  it('should validate threshold', () => {
+    const fireThreshold = 3;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(3);
+  });
+
+  it('should return a min fireThreshold if a negative value is provided', () => {
+    const fireThreshold = -3;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(DEFAULT_DURATION);
+  });
+
+  it('should return a min fireThreshold if an undefined value is provided', () => {
+    const fireThreshold = undefined;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(DEFAULT_DURATION);
   });
 });

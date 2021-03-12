@@ -19,3 +19,8 @@ export const validateThreshold = (
   if (!threshold || threshold < 0) return DEFAULT_DURATION;
   return Math.min(duration, threshold);
 };
+
+export const validateFireThreshold = (fireThreshold: number | undefined) => {
+  if (!fireThreshold || fireThreshold < 0) return DEFAULT_DURATION;
+  return fireThreshold;
+};
