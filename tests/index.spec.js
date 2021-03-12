@@ -9,9 +9,8 @@ describe('ChatmeterProgress', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should say hello world', () => {
+  it('should be titled chatmeter progress', () => {
     const wrapper = shallow(<ChatmeterProgress />);
-    const divEl = wrapper.text();
-    expect(divEl).toBe('Hello World');
+    expect(wrapper.text()).toBe('Chatmeter Progress');
   });
 });
