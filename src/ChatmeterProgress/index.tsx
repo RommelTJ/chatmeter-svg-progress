@@ -4,21 +4,30 @@ import {
   validateProgress,
   validateDuration,
   validateThreshold,
+  validateFireThreshold,
 } from '../utils';
 import ChatmeterSVGDefs from './components/ChatmeterSVGDefs';
 import ChatmeterSVGBars from './components/ChatmeterSVGBars';
+import ChatmeterSVGFlames from '@/ChatmeterProgress/components/ChatmeterSVGFlames';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
-  const { mode, revAnimationThreshold, duration } = props;
+  const {
+    mode,
+    revAnimationThreshold,
+    duration,
+    fireAnimationThreshold,
+  } = props;
 
   const [seconds, setSeconds] = useState(0);
   const [timedThresholdReached, setTimedThresholdReached] = useState(false);
+  const [fireThresholdReached, setFireThresholdReached] = useState(false);
 
   const validatedDuration = validateDuration(duration);
   const validatedThreshold = validateThreshold(
     validatedDuration,
     revAnimationThreshold,
   );
+  const validatedFireThreshold = validateFireThreshold(fireAnimationThreshold);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -27,6 +36,8 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
         setSeconds(seconds => {
           const newSeconds = seconds + 1;
           if (newSeconds >= validatedThreshold) setTimedThresholdReached(true);
+          if (newSeconds >= validatedFireThreshold)
+            setFireThresholdReached(true);
           return newSeconds;
         });
       }, 1000);
@@ -76,6 +87,12 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
     );
   };
 
+  const renderFlames = () => {
+    if (mode !== TIMED || !fireAnimationThreshold || !fireThresholdReached)
+      return undefined;
+    return <ChatmeterSVGFlames />;
+  };
+
   return (
     <svg width="300px" height="300px" viewBox="0 0 300 300">
       <title>Chatmeter Progress</title>
@@ -91,6 +108,7 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
         {renderAnimateTransform()}
       </g>
       <ChatmeterSVGBars />
+      {renderFlames()}
     </svg>
   );
 };
