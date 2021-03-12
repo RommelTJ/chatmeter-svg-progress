@@ -1,7 +1,23 @@
 {
-  "private": true,
   "name": "chatmeter-svg-progress",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "description": "Chatmeter SVG Progress UI Component for React",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-progress",
+    "progress",
+    "chatmeter",
+    "svg"
+  ],
+  "homepage": "https://github.com/RommelTJ/chatmeter-svg-progress",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:RommelTJ/chatmeter-svg-progress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RommelTJ/chatmeter-svg-progress/issues"
+  },
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -28,11 +44,21 @@
     ]
   },
   "dependencies": {
-    "react": "^16.12.0"
+    "classnames": "^2.2.6",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-test-renderer": "^16.14.0"
   },
   "devDependencies": {
+    "@jest/globals": "^26.6.2",
+    "@types/classnames": "^2.2.11",
+    "@types/react": "^16.14.0",
+    "@types/react-dom": "^16.9.11",
     "@umijs/test": "^3.0.5",
     "dumi": "^1.0.13",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.1",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
