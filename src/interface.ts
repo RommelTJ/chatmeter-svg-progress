@@ -7,6 +7,7 @@ export interface ProgressProps {
   to?: number;
   progress?: number;
   revAnimationThreshold?: number;
+  fireAnimationThreshold?: number;
 }
 
 export const STANDARD = 'standard';

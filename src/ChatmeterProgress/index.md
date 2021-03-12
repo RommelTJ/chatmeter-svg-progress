@@ -78,3 +78,28 @@ export default () => {
   );
 };
 ```
+
+Timed mode with fire (aka Dumpster mode):
+
+Props:
+
+- mode='timed'
+- duration={10}
+- revAnimationThreshold={8}
+- fireAnimationThreshold={15}
+
+```tsx
+import React from 'react';
+import { ChatmeterProgress } from 'chatmeter-svg-progress';
+
+export default () => {
+  return (
+    <ChatmeterProgress
+      mode="timed"
+      duration={10}
+      revAnimationThreshold={8}
+      fireAnimationThreshold={15}
+    />
+  );
+};
+```

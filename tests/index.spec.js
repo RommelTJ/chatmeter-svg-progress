@@ -4,10 +4,14 @@ import {
   validateProgress,
   validateDuration,
   validateThreshold,
+  validateFireThreshold,
 } from '../src/utils';
-import { shallow } from 'enzyme';
-import { describe, it } from '@jest/globals';
+import { shallow, mount } from 'enzyme';
+import { describe, it, jest } from '@jest/globals';
 import { DEFAULT_DURATION } from '../src/interface';
+import { act } from 'react-dom/test-utils';
+
+jest.useFakeTimers();
 
 describe('ChatmeterProgress', () => {
   it('renders correctly', () => {
@@ -17,7 +21,7 @@ describe('ChatmeterProgress', () => {
 
   it('should be titled chatmeter progress', () => {
     const wrapper = shallow(<ChatmeterProgress />);
-    expect(wrapper.text()).toBe('Chatmeter Progress');
+    expect(wrapper.text()).toContain('Chatmeter Progress');
   });
 
   it('should support progress mode', () => {
@@ -36,6 +40,27 @@ describe('ChatmeterProgress', () => {
       />,
     );
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should support timed mode with fire', () => {
+    const component = mount(
+      <ChatmeterProgress
+        mode={'timed'}
+        duration={10}
+        revAnimationThreshold={8}
+        fireAnimationThreshold={15}
+      />,
+    );
+    // Check that the flames don't show up yet.
+    expect(component.html().includes('flame')).toBe(false);
+
+    // Wait 15 seconds then check that we have created fire! Ugga ugga!
+    act(() => {
+      jest.advanceTimersByTime(15000);
+    });
+    expect(setTimeout).toHaveBeenCalledTimes(16);
+    expect(component.props().fireAnimationThreshold).toBe(15);
+    expect(component.html().includes('flame')).toBe(true);
   });
 });
 
@@ -95,5 +120,23 @@ describe('Utils', () => {
     const threshold = -10;
     const validatedThreshold = validateThreshold(duration, threshold);
     expect(validatedThreshold).toBe(DEFAULT_DURATION);
+  });
+
+  it('should validate threshold', () => {
+    const fireThreshold = 3;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(3);
+  });
+
+  it('should return a min fireThreshold if a negative value is provided', () => {
+    const fireThreshold = -3;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(DEFAULT_DURATION);
+  });
+
+  it('should return a min fireThreshold if an undefined value is provided', () => {
+    const fireThreshold = undefined;
+    const validatedFireThreshold = validateFireThreshold(fireThreshold);
+    expect(validatedFireThreshold).toBe(DEFAULT_DURATION);
   });
 });
