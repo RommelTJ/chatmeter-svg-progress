@@ -1,19 +1,27 @@
 # chatmeter-svg-progress
 
-Version: 0.0.1 - 10 Mar 2021
+## Getting Started
 
-## Description
+Install dependencies,
 
-Chatmeter SVG Progress "bar".
+```bash
+$ npm i
+```
 
-## Contributing
+Start the dev server,
 
-If you wish to contribute to this repo, please read the [Contributing document](.github/CONTRIBUTING.md).
+```bash
+$ npm start
+```
 
-## Support
+Build documentation,
 
-If you need help with this project, please read the [Support document](.github/SUPPORT.md).
+```bash
+$ npm run docs:build
+```
 
-## License
+Build library via `father-build`,
 
-[MIT License](LICENSE).
+```bash
+$ npm run build
+```
