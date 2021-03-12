@@ -1,7 +1,14 @@
 import React from 'react';
-import { ProgressProps, defaultProps } from '../interface';
+import { ProgressProps, defaultProps, PROGRESS } from '../interface';
+import { validatedProgress } from '../utils';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
+  // Progress is in percent, so we convert to degrees where 0 = 0% and 180 = 100%.
+  const userProgress = props.progress
+    ? validatedProgress(props.progress)
+    : undefined;
+  const progress: number = userProgress ? 180 * (userProgress / 100) : 0;
+
   return (
     <svg width="300px" height="300px" viewBox="0 0 300 300">
       <title>Chatmeter Progress</title>
@@ -78,11 +85,19 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
         <animateTransform
           attributeName="transform"
           type="rotate"
-          from={`${props.from} 150 150`}
-          to={`${props.to} 150 150`}
-          begin={`${props.begin}s`}
-          dur={`${props.duration}s`}
-          repeatCount={props.repeatCount}
+          from={
+            props.mode == PROGRESS
+              ? `${progress} 150 150`
+              : `${props.from} 150 150`
+          }
+          to={
+            props.mode == PROGRESS
+              ? `${progress} 150 150`
+              : `${props.to} 150 150`
+          }
+          begin={props.mode == PROGRESS ? '0s' : `${props.begin}s`}
+          dur={props.mode == PROGRESS ? '0s' : `${props.duration}s`}
+          repeatCount={props.mode == PROGRESS ? 0 : props.repeatCount}
         />
       </g>
       <g>
