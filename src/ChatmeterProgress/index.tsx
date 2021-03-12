@@ -1,13 +1,76 @@
-import React from 'react';
-import { ProgressProps, defaultProps, PROGRESS } from '../interface';
+import React, { useState, useEffect } from 'react';
+import {
+  ProgressProps,
+  defaultProps,
+  PROGRESS,
+  TIMED,
+  DEFAULT_DURATION,
+} from '../interface';
 import { validatedProgress } from '../utils';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
+  const [seconds, setSeconds] = useState(0);
+  const [timedThresholdReached, setTimedThresholdReached] = useState(false);
+  const { mode, revAnimationThreshold } = props;
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (mode == TIMED && revAnimationThreshold) {
+      const thresholdVal = revAnimationThreshold
+        ? revAnimationThreshold
+        : DEFAULT_DURATION;
+      interval = setInterval(() => {
+        setSeconds(seconds => {
+          const newSeconds = seconds + 1;
+          if (newSeconds > thresholdVal) setTimedThresholdReached(true);
+          return newSeconds;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [seconds]);
+
   // Progress is in percent, so we convert to degrees where 0 = 0% and 180 = 100%.
   const userProgress = props.progress
     ? validatedProgress(props.progress)
     : undefined;
   const progress: number = userProgress ? 180 * (userProgress / 100) : 0;
+
+  const renderRevAnimateTransform = () => {
+    return (
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="130 150 150"
+        to="160 150 150"
+        begin="0s"
+        dur="0.125s"
+        repeatCount="indefinite"
+      />
+    );
+  };
+
+  const renderAnimateTransform = () => {
+    if (mode == TIMED && timedThresholdReached)
+      return renderRevAnimateTransform();
+    return (
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from={
+          props.mode == PROGRESS
+            ? `${progress} 150 150`
+            : `${props.from} 150 150`
+        }
+        to={
+          props.mode == PROGRESS ? `${progress} 150 150` : `${props.to} 150 150`
+        }
+        begin={props.mode == PROGRESS ? '0s' : `${props.begin}s`}
+        dur={props.mode == PROGRESS ? '0s' : `${props.duration}s`}
+        repeatCount={props.mode == PROGRESS ? 0 : props.repeatCount}
+      />
+    );
+  };
 
   return (
     <svg width="300px" height="300px" viewBox="0 0 300 300">
@@ -82,23 +145,7 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
           fillRule="nonzero"
           transform="translate(88.895980, 146.912391) rotate(-156.000000) translate(-88.895980, -146.912391)"
         />
-        <animateTransform
-          attributeName="transform"
-          type="rotate"
-          from={
-            props.mode == PROGRESS
-              ? `${progress} 150 150`
-              : `${props.from} 150 150`
-          }
-          to={
-            props.mode == PROGRESS
-              ? `${progress} 150 150`
-              : `${props.to} 150 150`
-          }
-          begin={props.mode == PROGRESS ? '0s' : `${props.begin}s`}
-          dur={props.mode == PROGRESS ? '0s' : `${props.duration}s`}
-          repeatCount={props.mode == PROGRESS ? 0 : props.repeatCount}
-        />
+        {renderAnimateTransform()}
       </g>
       <g>
         <path
