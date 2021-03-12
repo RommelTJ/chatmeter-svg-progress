@@ -59,3 +59,22 @@ export default () => {
   return <ChatmeterProgress mode="progress" progress={50} />;
 };
 ```
+
+Timed mode:
+
+Props:
+
+- mode='timed'
+- duration={10}
+- revAnimationThreshold={8}
+
+```tsx
+import React from 'react';
+import { ChatmeterProgress } from 'chatmeter-svg-progress';
+
+export default () => {
+  return (
+    <ChatmeterProgress mode="timed" duration={10} revAnimationThreshold={8} />
+  );
+};
+```

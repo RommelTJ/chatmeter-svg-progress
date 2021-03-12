@@ -1,15 +1,17 @@
 export interface ProgressProps {
-  mode?: 'standard' | 'progress';
+  mode?: 'standard' | 'progress' | 'timed';
   duration?: number;
   begin?: number;
   repeatCount?: number | 'indefinite';
   from?: number;
   to?: number;
   progress?: number;
+  revAnimationThreshold?: number;
 }
 
 export const STANDARD = 'standard';
 export const PROGRESS = 'progress';
+export const TIMED = 'timed';
 export const INDEFINITE = 'indefinite';
 
 export const DEFAULT_DURATION = 5; // 5 seconds
