@@ -1,5 +1,5 @@
 export interface ProgressProps {
-  mode: 'standard';
+  mode?: 'standard';
   duration?: number;
   begin?: number;
   repeatCount?: number | 'infinite';
