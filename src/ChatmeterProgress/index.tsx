@@ -6,23 +6,31 @@ import {
   TIMED,
   DEFAULT_DURATION,
 } from '../interface';
-import { validatedProgress } from '../utils';
+import {
+  validatedProgress,
+  validateDuration,
+  validateThreshold,
+} from '../utils';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
+  const { mode, revAnimationThreshold, duration } = props;
+
   const [seconds, setSeconds] = useState(0);
   const [timedThresholdReached, setTimedThresholdReached] = useState(false);
-  const { mode, revAnimationThreshold } = props;
+
+  const validatedDuration = validateDuration(duration);
+  const validatedThreshold = validateThreshold(
+    validatedDuration,
+    revAnimationThreshold,
+  );
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (mode == TIMED && revAnimationThreshold) {
-      const thresholdVal = revAnimationThreshold
-        ? revAnimationThreshold
-        : DEFAULT_DURATION;
       interval = setInterval(() => {
         setSeconds(seconds => {
           const newSeconds = seconds + 1;
-          if (newSeconds > thresholdVal) setTimedThresholdReached(true);
+          if (newSeconds >= validatedThreshold) setTimedThresholdReached(true);
           return newSeconds;
         });
       }, 1000);
