@@ -8,7 +8,7 @@ import {
 } from '../utils';
 import ChatmeterSVGDefs from './components/ChatmeterSVGDefs';
 import ChatmeterSVGBars from './components/ChatmeterSVGBars';
-import ChatmeterSVGFlames from '@/ChatmeterProgress/components/ChatmeterSVGFlames';
+import ChatmeterSVGFlames from './components/ChatmeterSVGFlames';
 
 const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
   const {
