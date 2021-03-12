@@ -43,3 +43,19 @@ export default () => {
   );
 };
 ```
+
+Progress mode:
+
+Props:
+
+- mode='progress'
+- progress={50}
+
+```tsx
+import React from 'react';
+import { ChatmeterProgress } from 'chatmeter-svg-progress';
+
+export default () => {
+  return <ChatmeterProgress mode="progress" progress={50} />;
+};
+```
