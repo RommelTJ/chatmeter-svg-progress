@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { ProgressProps, defaultProps, PROGRESS, TIMED } from '../interface';
 import {
-  ProgressProps,
-  defaultProps,
-  PROGRESS,
-  TIMED,
-  DEFAULT_DURATION,
-} from '../interface';
-import {
-  validatedProgress,
+  validateProgress,
   validateDuration,
   validateThreshold,
 } from '../utils';
@@ -40,7 +34,7 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
 
   // Progress is in percent, so we convert to degrees where 0 = 0% and 180 = 100%.
   const userProgress = props.progress
-    ? validatedProgress(props.progress)
+    ? validateProgress(props.progress)
     : undefined;
   const progress: number = userProgress ? 180 * (userProgress / 100) : 0;
 

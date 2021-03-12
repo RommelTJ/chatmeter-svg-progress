@@ -1,6 +1,6 @@
 import { DEFAULT_DURATION } from './interface';
 
-export const validatedProgress = (progress: number) => {
+export const validateProgress = (progress: number) => {
   if (progress < 0) return 0;
   if (progress > 100) return 100;
   return progress;
