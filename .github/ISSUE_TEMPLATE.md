@@ -1,19 +1,21 @@
 **I'm submitting a ...**
+
 <!-- (check one with "x") -->
+
 - [ ] bug report
 - [ ] feature request
 - [ ] other (Please do not submit support requests here (below))
 
 ## Notes:
 
-* Please **do not** use the issue tracker for personal support requests.
+- Please **do not** use the issue tracker for personal support requests.
 
-* Please **do not** derail or troll issues. Keep the discussion on topic and
+- Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
 
-* Please **do not** open issues or pull requests regarding how to run the algorithms.
+- Please **do not** open issues or pull requests regarding how to run the algorithms.
 
-* Please **do not** open issues or pull requests if you do not understand the algorithms,
+- Please **do not** open issues or pull requests if you do not understand the algorithms,
   or tutoring requests.
 
 ## Bug reports
@@ -60,11 +62,9 @@ Example:
 > causing the bug, and potential solutions (and your opinions on their
 > merits).
 
-
 ## Feature requests
 
 Feature requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the project. It's up to *you* to make a strong
+fits with the scope and aims of the project. It's up to _you_ to make a strong
 case to convince the project's developers of the merits of this feature. Please
 provide as much detail and context as possible.
-

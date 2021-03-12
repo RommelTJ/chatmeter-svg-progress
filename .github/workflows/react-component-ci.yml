@@ -43,7 +43,7 @@ jobs:
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: npm ci
-  
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -63,10 +63,10 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
 
       - name: lint
-        run: npm run lint
+        run: npm run prettier
 
     needs: setup
-  
+
   compile:
     runs-on: ubuntu-latest
     steps:
@@ -86,10 +86,10 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
 
       - name: compile
-        run: npm run compile
+        run: npm run build
 
     needs: setup
-  
+
   coverage:
     runs-on: ubuntu-latest
     steps:
