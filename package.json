@@ -2,6 +2,8 @@
   "name": "chatmeter-svg-progress",
   "version": "1.0.0",
   "description": "Chatmeter SVG Progress UI Component for React",
+  "author": "Rommel Rico",
+  "license": "MIT",
   "keywords": [
     "react",
     "react-component",
