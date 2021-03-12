@@ -6,7 +6,7 @@ nav:
 
 ## ChatmeterProgress
 
-Demo:
+Standard Mode with Default Props:
 
 ```tsx
 import React from 'react';
