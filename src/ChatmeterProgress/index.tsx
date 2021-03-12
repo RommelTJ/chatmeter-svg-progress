@@ -75,6 +75,15 @@ const ChatmeterProgress: React.FC<ProgressProps> = (props: ProgressProps) => {
           fillRule="nonzero"
           transform="translate(88.895980, 146.912391) rotate(-156.000000) translate(-88.895980, -146.912391)"
         />
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 150 150"
+          to="180 150 150"
+          begin={`${props.begin}s`}
+          dur={`${props.duration}s`}
+          repeatCount={props.repeatCount}
+        />
       </g>
       <g>
         <path
